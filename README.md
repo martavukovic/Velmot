@@ -24,9 +24,8 @@
 
 ### Semester Assignments
 
-- Link to Assignment 1: [**Idea Pitch**](https://github.com/user-attachments/assets/ac6d06b0-2fb9-412a-aa01-2b0b479415ad) <!-- Replace with actual URL -->
+- Link to Assignment 1: [**Idea Pitch**](https://github.com/user-attachments/assets/ac6d06b0-2fb9-412a-aa01-2b0b479415ad)
 - Link to Assignment 2: [**User personas and information architecture**](https://github.com/user-attachments/files/23246080/VELMOT.WEB.APP.pdf)
-) <!-- Replace with actual URL -->
 - Link to Assignment 3: [**Assignment 3**](URL_TO_ASSIGNMENT_3) <!-- Replace with actual URL -->
 <!-- Add more assignments as necessary -->
 
