@@ -1,0 +1,17 @@
+Project title:
+VelmotApp
+
+Problem statement:
+Users and companies that rely on electric motors, tools, and transformers often lack an easy way to request service, track repair status and communicate with the workshop.  
+This leads to time loss, unclear information, and delays in operations.
+
+Target users:
+Industrial companies, craftsmen, and private users of electrical tools and devices who use Velmot’s electro-service solutions.
+
+Proposed solution:
+Develop a web application for online service requests, real-time repair tracking, and digital management of work orders.
+This improves communication between customers and the workshop while speeding up the entire service process.
+
+How you came up with the idea:
+The idea came from personal experience and real needs within the Velmot company, which specializes in rewinding electric motors, transformer servicing, tool repair and other.  
+Through daily operations, the need for a digital system became clear — one that would simplify service tracking and improve communication with clients.
