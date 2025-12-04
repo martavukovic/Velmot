@@ -27,8 +27,8 @@
 - Link to Assignment 1: [**Idea Pitch**](https://github.com/user-attachments/assets/ac6d06b0-2fb9-412a-aa01-2b0b479415ad)
 - Link to Assignment 2: [**User personas and information architecture**](https://github.com/user-attachments/files/23246080/VELMOT.WEB.APP.pdf)
 - Link to Assignment 3: [**Next.js - Deploying Appliction**](https://velmot.vercel.app/) <!-- Replace with actual URL -->
-- Link to Assignment 4: [**Low/High-fidelity prototype**](<img width="1440" height="1202" alt="Prototype" src="https://github.com/user-attachments/assets/c08973cd-8da7-440c-b607-987fe1728ca7" />)
-
+- Link to Assignment 4: [**Low/High-fidelity prototype**](https://github.com/user-attachments/assets/c08973cd-8da7-440c-b607-987fe1728ca7)
+  
 ## Project Requirements
 
 ### Web Application Requirements
