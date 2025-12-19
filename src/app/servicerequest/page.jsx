@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <main>
+    <div className="page">
       <h1>Zahtjev</h1>
       <p>Upravljajte svojim zahtjevima za popravak, pošaljite nove ili pregledajte prethodne usluge.</p>
 
@@ -14,6 +14,6 @@ export default function Page() {
           <Link href="/servicerequest/history">Povijest</Link>
         </p>
       </div>
-    </main>
+    </div>
   );
 }
