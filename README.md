@@ -28,7 +28,7 @@
 - Link to Assignment 2: [**User personas and information architecture**](https://github.com/user-attachments/files/23246080/VELMOT.WEB.APP.pdf)
 - Link to Assignment 3: [**Next.js - Deploying Appliction**](https://velmot.vercel.app/) <!-- Replace with actual URL -->
 - Link to Assignment 4: [**Low/High-fidelity prototype**](https://github.com/user-attachments/assets/c08973cd-8da7-440c-b607-987fe1728ca7)
-- Link to Assignment 5: [**Next.js - Dynamic routes, data fetching**](https://velmot-pdn258kdx-martas-projects-4e865da0.vercel.app)
+- Link to Assignment 5: [**Next.js - Dynamic routes, data fetching**](velmot.vercel.app)
   
 ## Project Requirements
 
