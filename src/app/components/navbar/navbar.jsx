@@ -26,13 +26,6 @@ export default function Navbar() {
       </Link>
 
       <Link
-        href="/signin"
-        className={isActive("/signin") ? styles.active : ""}
-      >
-        Prijava
-      </Link>
-
-      <Link
         href="/useraccount"
         className={isActive("/useraccount") ? styles.active : ""}
       >
@@ -66,6 +59,15 @@ export default function Navbar() {
       >
         Kontakt
       </Link>
+        
+      <Link
+      href="/signin"
+      className={`${styles.signin} ${
+      isActive("/signin") ? styles.activeButton : ""}`}
+      >
+        Prijava
+      </Link>
+
     </nav>
   );
 }
