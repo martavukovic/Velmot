@@ -29,9 +29,9 @@
 - Link to Assignment 3: [**Next.js - Deploying Appliction**](https://velmot.vercel.app/) <!-- Replace with actual URL -->
 - Link to Assignment 4: [**Low/High-fidelity prototype**](https://github.com/user-attachments/assets/c08973cd-8da7-440c-b607-987fe1728ca7)
 - Link to Assignment 5: [**Next.js - Dynamic routes, data fetching**](https://velmot.vercel.app/)
-- Link to Assignment 6: [**High-fidelity prototype - Desktop**]("https://github.com/user-attachments/assets/8697a744-2f2b-46b9-9207-992d65342d5e">)
-                        [**High-fidelity protoype - Mobile**]("https://github.com/user-attachments/assets/17a4226d-d89d-4e50-9b8d-0a362e07d817">)
-                        [**Full Responsive Page Coding**]("https://velmot.vercel.app/")
+- Link to Assignment 6: [**High-fidelity prototype - Desktop**](https://github.com/user-attachments/assets/8697a744-2f2b-46b9-9207-992d65342d5e)
+                        [**High-fidelity protoype - Mobile**](https://github.com/user-attachments/assets/17a4226d-d89d-4e50-9b8d-0a362e07d817)
+                        [**Full Responsive Page Coding**](https://velmot.vercel.app/)
   
 ## Project Requirements
 
