@@ -7,70 +7,104 @@
 }
 
 .inner {
-  padding: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 30px;
+  margin: 0 28px;
 }
 
-
-/* LOGO */
+/* LOGO – OSTAVLJENO */
 .logo {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #0a2540;
+  display: flex;
+  align-items: center;
 }
 
-/* LINKS */
+/* DESKTOP LINKS */
 .links {
   display: flex;
   align-items: center;
-  gap: 1.6rem;
-  justify-content: flex-start;
-  margin-left: 20px;
-
-  flex: 1; /* 🔑 OVO FALI */
+  gap: 0.75rem;
+  margin-left: 3rem; /* 🔑 OVO POMIČE HEADER UDESNO */
+  flex: 1;
 }
 
-
+/* LINK */
 .links a {
   text-decoration: none;
   color: #0a2540;
   font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: 8px;
   position: relative;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
 }
 
+/* hover */
+.links a:hover {
+  background: rgba(37, 99, 235, 0.08);
+}
+
+/* active page */
 .active {
   color: #2563eb;
+  background: rgba(37, 99, 235, 0.14);
 }
 
-.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 2px;
-  background: #2563eb;
+/* subtle press */
+.links a:active {
+  transform: scale(0.96);
 }
 
-/* SIGN IN BUTTON */
-.signin {
-  margin-left: auto; /* 🔑 gura SAMO login skroz desno */
-  padding: 0.5rem 1.2rem;
+/* SIGN IN – NORMAL */
+.links .signin {
+  margin-left: auto;
+  padding: 0.45rem 1.3rem;
   border-radius: 999px;
-  background: #c0392b;
-  color: white !important;
+  background-color: #c0392b; /* jaka crvena */
+  color: #ffffff !important;
   font-weight: 600;
+  font-size: 0.9rem;
   text-decoration: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+  border: 2px solid #c0392b;
+  box-shadow: 0 6px 14px rgba(192, 57, 43, 0.35);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/* HOVER – SVIJETLO CRVENA POZADINA + CRVENA SLOVA */
+.links .signin:hover {
+  background-color: #fde2e0; /* svijetlo crvena */
+  color: #c0392b !important; /* crvena slova */
+  border-color: #c0392b;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(192, 57, 43, 0.25);
+}
+
+/* CLICK */
+.links .signin:active {
+  background-color: #f9cfc9; /* malo jača svijetla crvena */
+  color: #c0392b !important;
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(192, 57, 43, 0.25);
+}
+
+/* AKTIVNA STRANICA */
+.links .signin.activeButton {
+  background-color: #f9cfc9;
+  color: #c0392b !important;
+  border-color: #c0392b;
+  box-shadow: inset 0 0 0 2px rgba(192, 57, 43, 0.35);
 }
 
 
-.activeButton {
-  box-shadow: 0 0 0 2px rgba(192, 57, 43, 0.4);
-}
 
 /* HAMBURGER */
 .hamburger {
@@ -93,15 +127,21 @@
 .mobileMenu {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  padding: 1.5rem;
+  gap: 1rem;
+  padding: 1.4rem;
   background: white;
   border-top: 1px solid #e5e7eb;
 }
 
 .mobileMenu a {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #0a2540;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+}
+
+.mobileMenu a:hover {
+  background: rgba(37, 99, 235, 0.08);
 }
 
 /* RESPONSIVE */
