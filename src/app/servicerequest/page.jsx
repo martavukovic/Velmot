@@ -1,19 +1,190 @@
-import Link from "next/link";
+"use client";
 
-export default function Page() {
+import { useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import styles from "./ServiceRequest.module.css";
+
+const SERVICES = [
+  {
+    title: "Electric Motor Repair",
+    short: "Rewinding and diagnostics",
+  },
+  {
+    title: "Transformers",
+    short: "Manufacturing & servicing",
+  },
+  {
+    title: "Electrical Installations",
+    short: "Industrial electrical works",
+  },
+  {
+    title: "Energy Systems",
+    short: "Solar & auxiliary systems",
+  },
+  {
+    title: "Industrial Diagnostics",
+    short: "Testing & fault analysis",
+  },
+  {
+    title: "Maintenance Programs",
+    short: "Planned service",
+  },
+];
+
+export default function RequestServicePage() {
+  const [serviceType, setServiceType] = useState(null);
+  const [subject, setSubject] = useState("");
+  const [description, setDescription] = useState("");
+  const [company, setCompany] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      alert("Moraš biti prijavljen");
+      setLoading(false);
+      return;
+    }
+
+    let imageUrl = null;
+    if (imageFile) {
+      const fileExt = imageFile.name.split('.').pop();
+      const fileName = `${Date.now()}.${fileExt}`;
+      const filePath = `service-requests/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('images')
+        .upload(filePath, imageFile);
+
+      if (uploadError) {
+        alert("Neuspješan upload slike");
+        setLoading(false);
+        return;
+      }
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('images')
+        .getPublicUrl(filePath);
+
+      imageUrl = publicUrl;
+    }
+
+    const { error } = await supabase.from("service_requests").insert([
+      {
+        user_id: user.id,
+        service_type: serviceType ? serviceType.title : null,
+        subject,
+        description,
+        company,
+        images: imageUrl ? [imageUrl] : [],
+      },
+    ]);
+
+    if (!error) {
+      setSuccess(true);
+      setServiceType(null);
+      setSubject("");
+      setDescription("");
+      setCompany("");
+      setImageFile(null);
+    }
+
+    setLoading(false);
+  };
+
   return (
-    <div className="page">
-      <h1>Zahtjev</h1>
-      <p>Upravljajte svojim zahtjevima za popravak, pošaljite nove ili pregledajte prethodne usluge.</p>
+    <section className={styles.request}>
+      <div className={styles.container}>
+        <header className={styles.header}>
+          <h1>Request a service</h1>
+          <p>Recite nam što trebate — pregledat ćemo vaš zahtjev i javiti se uskoro.</p>
+        </header>
 
-      <div>
-        <p>
-          <Link href="/servicerequest/new">Novi zahtjev</Link>
-        </p>
-        <p>
-          <Link href="/servicerequest/history">Povijest</Link>
-        </p>
+        {/* STEP 1 */}
+        <section className={styles.step}>
+          <h2>1. Odaberite uslugu</h2>
+
+          <div className={styles.serviceGrid}>
+            {SERVICES.map((s) => (
+              <button
+                key={s.title}
+                type="button"
+                onClick={() =>
+                  setServiceType(serviceType?.title === s.title ? null : s)
+                }
+                className={`${styles.serviceCard} ${
+                  serviceType?.title === s.title ? styles.active : ""
+                }`}
+              >
+                <strong>{s.title}</strong>
+                <span>{s.short}</span>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* STEP 2 - Uvijek vidljivo */}
+        <section className={styles.step}>
+          <h2>2. Opis zahtjeva</h2>
+
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.field}>
+              <label>Predmet</label>
+              <input
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                placeholder="Kratki sažetak"
+                required
+              />
+            </div>
+
+            <div className={styles.field}>
+              <label>Opis</label>
+              <textarea
+                rows={6}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Objasnite što trebate, ciljeve, rokove..."
+                required
+              />
+            </div>
+
+            <div className={styles.field}>
+              <label>Tvrtka (opcionalno)</label>
+              <input
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                placeholder="Naziv tvrtke"
+              />
+            </div>
+
+            <div className={styles.field}>
+              <label>Učitajte sliku (opcionalno)</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImageFile(e.target.files[0])}
+              />
+            </div>
+
+            <button className={styles.submitBtn} disabled={loading}>
+              {loading ? "Slanje..." : "Pošalji zahtjev"}
+            </button>
+
+            {success && (
+              <p className={styles.success}>✅ Zahtjev je uspješno poslan</p>
+            )}
+          </form>
+        </section>
       </div>
-    </div>
+    </section>
   );
 }

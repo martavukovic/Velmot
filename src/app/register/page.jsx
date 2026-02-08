@@ -58,8 +58,9 @@ export default function Register() {
     ])
 
     if (dbError) {
-      setError(dbError.message)
-    }
+  console.error("Database insert error:", dbError);
+  setError("Database error saving new user: " + dbError.message);
+}
 
     setLoading(false)
   }
