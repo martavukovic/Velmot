@@ -107,7 +107,7 @@ export default function HomePage() {
         <title>Velmot – Electrotechnical Services</title>
         <link
           rel="icon"
-          href="/images/velmot_cut_logo.png"
+          href="/images/Velmot_cut_logo.png"
           type="image/png"
         />
       </Head>
