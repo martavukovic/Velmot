@@ -1,4 +1,6 @@
 "use client";
+
+import Head from "next/head";
 import { useState, useEffect } from "react";
 import {
   Settings,
@@ -58,26 +60,31 @@ const images = [
 ];
 
 export default function HomePage() {
-  const [active, setActive] = useState(null);
+  const [activeService, setActiveService] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [fade, setFade] = useState(true);
 
   useEffect(() => {
-    if (isPaused) return;
+    const esc = (e) => e.key === "Escape" && setActiveService(null);
+    window.addEventListener("keydown", esc);
+    return () => window.removeEventListener("keydown", esc);
+  }, []);
 
+  useEffect(() => {
+    if (isPaused) return;
     const interval = setInterval(() => {
-      setFade(false); // fade out
+      setFade(false);
       setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % images.length);
-        setFade(true); // fade in
-      }, 400); // trajanje fade out
+        setFade(true);
+      }, 400);
     }, 4000);
-
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  const prevImage = () => {
+  const handlePrev = () => {
+    setIsPaused(true);
     setFade(false);
     setTimeout(() => {
       setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -85,7 +92,8 @@ export default function HomePage() {
     }, 400);
   };
 
-  const nextImage = () => {
+  const handleNext = () => {
+    setIsPaused(true);
     setFade(false);
     setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -93,174 +101,160 @@ export default function HomePage() {
     }, 400);
   };
 
-  const handlePrev = () => {
-    setIsPaused(true);
-    prevImage();
-  };
-
-  const handleNext = () => {
-    setIsPaused(true);
-    nextImage();
-  };
-
   return (
-    <main className={styles.page}>
-      {/* HERO */}
-      <section className={styles.hero}>
-        <div className={styles.heroInner}>
-          <h1>Industrial Electrical Repairs, Done Right</h1>
-          <p>
-            Velmot delivers precision electrotechnical services for industry,
-            infrastructure and professionals who require reliability.
-          </p>
-          <div className={styles.heroActions}>
-            <a href="/servicerequest" className={styles.primaryBtn}>
-              Service Request
-            </a>
-            <a href="/contact" className={styles.secondaryBtn}>
-              Contact Us
-            </a>
-          </div>
-        </div>
-      </section>
+    <>
+      <Head>
+        <title>Velmot – Electrotechnical Services</title>
+        <link
+          rel="icon"
+          href="/images/velmot_cut_logo.png"
+          type="image/png"
+        />
+      </Head>
 
-      {/* SERVICES */}
-      <section className={styles.services}>
-        <h2>Services</h2>
-        <div className={styles.cards}>
-          {services.map((s, i) => {
-            const Icon = s.icon;
-            return (
-              <button
-                key={i}
-                className={`${styles.card} ${
-                  active === i ? styles.active : ""
-                }`}
-                onClick={() => setActive(active === i ? null : i)}
-              >
-                <div className={styles.cardHeader}>
-                  <Icon size={22} />
-                  <div>
-                    <h3>{s.title}</h3>
-                    <span>{s.short}</span>
-                  </div>
-                </div>
-
-                <div
-                  className={`${styles.cardBody} ${
-                    active === i ? styles.expand : styles.collapse
-                  }`}
-                >
-                  <p>{s.long}</p>
-                </div>
-
-                {active !== i && (
-                  <span className={styles.expandHint}>
-                    Click to expand
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* IMAGE CAROUSEL */}
-      <section className={styles.carouselSection}>
-        <div className={styles.carousel}>
-          <button onClick={handlePrev} className={styles.carouselBtn}>‹</button>
-
-          <img
-            src={images[currentIndex]}
-            alt={`Gallery image ${currentIndex + 1}`}
-            className={styles.carouselImage}
-            style={{ opacity: fade ? 1 : 0, transition: "opacity 0.4s ease-in-out" }}
-          />
-
-          <button onClick={handleNext} className={styles.carouselBtn}>›</button>
-        </div>
-
-        <div className={styles.carouselDots}>
-          {images.map((_, i) => (
-            <span
-              key={i}
-              role="button"
-              tabIndex={0}
-              aria-label={`Go to image ${i + 1}`}
-              className={`${styles.dot} ${
-                currentIndex === i ? styles.activeDot : ""
-              }`}
-              onClick={() => {
-                setFade(false);
-                setTimeout(() => {
-                  setCurrentIndex(i);
-                  setFade(true);
-                }, 400);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  setFade(false);
-                  setTimeout(() => {
-                    setCurrentIndex(i);
-                    setFade(true);
-                  }, 400);
-                }
-              }}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className={styles.cta}>
-        <div className={styles.ctaInner}>
-          <div className={styles.ctaText}>
-            <h2>Need a reliable electrical service partner?</h2>
+      <main className={styles.page}>
+        {/* HERO */}
+        <section className={styles.hero}>
+          <div className={styles.heroInner}>
+            <h1>Industrial Electrical Repairs, Done Right</h1>
             <p>
-              From urgent repairs to planned maintenance, our team responds with
-              clear communication, technical accuracy and proven processes.
+              Velmot delivers precision electrotechnical services for industry,
+              infrastructure and professionals who require reliability.
             </p>
+            <div className={styles.heroActions}>
+              <a href="/servicerequest" className={styles.primaryBtn}>
+                Service Request
+              </a>
+              <a href="/contact" className={styles.secondaryBtn}>
+                Contact Us
+              </a>
+            </div>
           </div>
-          <a
-            href="/servicerequest"
-            className={`${styles.ctaButton} ${styles.primaryBtn}`}
+        </section>
+
+        {/* SERVICES */}
+        <section className={styles.services}>
+          <h2>Services</h2>
+          <div className={styles.cards}>
+            {services.map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <button
+                  key={i}
+                  className={styles.card}
+                  onClick={() => setActiveService(s)}
+                >
+                  <Icon size={28} />
+                  <h3>{s.title}</h3>
+                  <p>{s.short}</p>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* MODAL */}
+        {activeService && (
+          <div
+            className={styles.modalOverlay}
+            onClick={() => setActiveService(null)}
           >
-            Request a Service
-          </a>
-        </div>
-      </section>
+            <div
+              className={styles.modal}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className={styles.modalTitle}>
+                <activeService.icon size={36} />
+                <h3>{activeService.title}</h3>
+              </div>
+              <p>{activeService.long}</p>
+              <button
+                className={styles.modalClose}
+                onClick={() => setActiveService(null)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
 
-      {/* FOOTER */}
-      <footer className={styles.footer}>
-        <div className={styles.footerGrid}>
-          <div className={styles.footerBrand}>
-            <strong>Velmot</strong>
-            <p>Electrotechnical Services</p>
+        {/* IMAGE CAROUSEL */}
+        <section className={styles.carouselSection}>
+          <div className={styles.carousel}>
+            <button
+              onClick={handlePrev}
+              className={`${styles.arrow} ${styles.left}`}
+            >
+              ‹
+            </button>
+
+            <img
+              src={images[currentIndex]}
+              alt=""
+              className={styles.carouselImage}
+              style={{ opacity: fade ? 1 : 0 }}
+            />
+
+            <button
+              onClick={handleNext}
+              className={`${styles.arrow} ${styles.right}`}
+            >
+              ›
+            </button>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className={styles.cta}>
+          <div className={styles.ctaInner}>
+            <div className={styles.ctaText}>
+              <h2>Need a reliable electrical service partner?</h2>
+              <p>
+                From urgent repairs to planned maintenance, our team responds with
+                clear communication, technical accuracy and proven processes.
+              </p>
+            </div>
+            <a
+              href="/servicerequest"
+              className={`${styles.ctaButton} ${styles.primaryBtn}`}
+            >
+              Request a Service
+            </a>
+          </div>
+        </section>
+
+        {/* FOOTER */}
+        <footer className={styles.footer}>
+          <div className={styles.footerGrid}>
+            <div className={styles.footerBrand}>
+              <strong>Velmot</strong>
+              <p>Electrotechnical Services</p>
+            </div>
+
+            <div>
+              <h4>Contact</h4>
+              <p>+385 95 9400 094</p>
+              <p>velmot@net.hr</p>
+            </div>
+
+            <div>
+              <h4>Location</h4>
+              <p>Put Piketa 8b</p>
+              <p>21230 Sinj, Croatia</p>
+            </div>
+
+            <div>
+              <h4>Working Hours</h4>
+              <p>Mon – Fri</p>
+              <p>08:00 – 16:00</p>
+            </div>
           </div>
 
-          <div>
-            <h4>Contact</h4>
-            <p>+385 95 9400 094</p>
-            <p>velmot@net.hr</p>
+          <div className={styles.footerBottom}>
+            © {new Date().getFullYear()} Velmot. All rights reserved.
           </div>
-
-          <div>
-            <h4>Location</h4>
-            <p>Put Piketa 8b</p>
-            <p>21230 Sinj, Croatia</p>
-          </div>
-
-          <div>
-            <h4>Working Hours</h4>
-            <p>Mon – Fri</p>
-            <p>08:00 – 16:00</p>
-          </div>
-        </div>
-
-        <div className={styles.footerBottom}>
-          © {new Date().getFullYear()} Velmot. All rights reserved.
-        </div>
-      </footer>
-    </main>
+        </footer>
+      </main>
+    </>
   );
 }
