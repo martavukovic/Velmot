@@ -1,151 +1,139 @@
+/* =============================
+   NAVBAR — unified with dark homepage
+   ============================= */
+
 .navbar {
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
+
+  /* SAME dark tone as homepage */
+  background: radial-gradient(circle at 20% 10%, #0f172a, #020617 60%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
 }
 
 .inner {
+  max-width: 1200px;
+  margin: 0 140px;
+  padding-left: 0px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 28px;
 }
 
-/* LOGO – OSTAVLJENO */
+/* =============================
+   LOGO
+   ============================= */
+
 .logo {
   display: flex;
   align-items: center;
 }
 
-/* DESKTOP LINKS */
+/* =============================
+   DESKTOP LINKS
+   ============================= */
+
 .links {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-left: 3rem; /* 🔑 OVO POMIČE HEADER UDESNO */
-  flex: 1;
+  gap: 28px;
 }
 
-/* LINK */
 .links a {
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
-  color: #0a2540;
+  font-size: 15px;
   font-weight: 500;
-  font-size: 0.95rem;
-  padding: 0.45rem 0.65rem;
-  border-radius: 8px;
+  letter-spacing: 0.2px;
   position: relative;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.15s ease;
+  transition: all 0.25s ease;
 }
 
-/* hover */
+/* modern subtle hover */
 .links a:hover {
-  background: rgba(37, 99, 235, 0.08);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
-/* active page */
+/* ACTIVE LINK — modern pill, no underline */
 .active {
-  color: #2563eb;
-  background: rgba(37, 99, 235, 0.14);
+  color: #ffffff !important;
 }
 
-/* subtle press */
-.links a:active {
-  transform: scale(0.96);
+.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
 }
 
-/* SIGN IN – NORMAL */
-.links .signin {
-  margin-left: auto;
-  padding: 0.45rem 1.3rem;
-  border-radius: 999px;
-  background-color: #c0392b; /* jaka crvena */
+/* =============================
+   LOGIN BUTTON (CTA)
+   ============================= */
+
+.signin {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
   color: #ffffff !important;
   font-weight: 600;
-  font-size: 0.9rem;
-  text-decoration: none;
-  border: 2px solid #c0392b;
-  box-shadow: 0 6px 14px rgba(192, 57, 43, 0.35);
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
+  transition: all 0.25s ease;
 }
 
-/* HOVER – SVIJETLO CRVENA POZADINA + CRVENA SLOVA */
-.links .signin:hover {
-  background-color: #fde2e0; /* svijetlo crvena */
-  color: #c0392b !important; /* crvena slova */
-  border-color: #c0392b;
+.signin:hover {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
   transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(192, 57, 43, 0.25);
 }
 
-/* CLICK */
-.links .signin:active {
-  background-color: #f9cfc9; /* malo jača svijetla crvena */
-  color: #c0392b !important;
-  transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(192, 57, 43, 0.25);
+.activeButton {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
 }
 
-/* AKTIVNA STRANICA */
-.links .signin.activeButton {
-  background-color: #f9cfc9;
-  color: #c0392b !important;
-  border-color: #c0392b;
-  box-shadow: inset 0 0 0 2px rgba(192, 57, 43, 0.35);
-}
+/* =============================
+   HAMBURGER
+   ============================= */
 
-
-
-/* HAMBURGER */
 .hamburger {
   display: none;
   flex-direction: column;
-  gap: 5px;
-  background: none;
+  gap: 4px;
+  background: transparent;
   border: none;
   cursor: pointer;
 }
 
 .hamburger span {
   width: 24px;
-  height: 3px;
-  background: #0a2540;
-  border-radius: 2px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.25s ease;
 }
 
-/* MOBILE MENU */
+/* =============================
+   MOBILE MENU
+   ============================= */
+
 .mobileMenu {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1.4rem;
-  background: white;
-  border-top: 1px solid #e5e7eb;
+  display: none;
 }
 
-.mobileMenu a {
-  font-size: 1rem;
-  color: #0a2540;
-  padding: 0.5rem 0.6rem;
-  border-radius: 6px;
-}
+/* =============================
+   RESPONSIVE
+   ============================= */
 
-.mobileMenu a:hover {
-  background: rgba(37, 99, 235, 0.08);
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .links {
     display: none;
   }
@@ -153,4 +141,159 @@
   .hamburger {
     display: flex;
   }
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px 24px 28px;
+
+    background: #0b1220; /* identical to navbar */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    animation: slideDown 0.25s ease;
+  }
+
+  .mobileMenu a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .mobileMenu .signin {
+    width: fit-content;
+    margin-top: 6px;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= CSS (signin.module.css) ================= */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 18, 35, 0.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal {
+  width: 100%;
+  max-width: 420px;
+  background: #f4f7fb;
+  border-radius: 18px;
+  padding: 32px 28px 28px;
+  position: relative;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  animation: popIn 0.25s ease;
+}
+
+@keyframes popIn {
+  from {
+    transform: translateY(10px) scale(0.97);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  font-size: 26px;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #0b1220;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.field input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.button {
+  margin-top: 6px;
+  padding: 13px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #2563eb, #ef4444);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
+}
+
+.error {
+  color: #dc2626;
+  font-size: 13px;
+}
+
+.errorInput {
+  border-color: #dc2626 !important;
+}
+
+.registerText {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.registerText a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
 }

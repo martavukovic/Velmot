@@ -1,3 +1,6 @@
+// ===============================
+// RequestServicePage.jsx
+// ===============================
 "use client";
 
 import { useState } from "react";
@@ -5,30 +8,12 @@ import { supabase } from "@/lib/supabaseClient";
 import styles from "./ServiceRequest.module.css";
 
 const SERVICES = [
-  {
-    title: "Electric Motor Repair",
-    short: "Rewinding and diagnostics",
-  },
-  {
-    title: "Transformers",
-    short: "Manufacturing & servicing",
-  },
-  {
-    title: "Electrical Installations",
-    short: "Industrial electrical works",
-  },
-  {
-    title: "Energy Systems",
-    short: "Solar & auxiliary systems",
-  },
-  {
-    title: "Industrial Diagnostics",
-    short: "Testing & fault analysis",
-  },
-  {
-    title: "Maintenance Programs",
-    short: "Planned service",
-  },
+  { title: "Electric Motor Repair", short: "Rewinding and diagnostics" },
+  { title: "Transformers", short: "Manufacturing & servicing" },
+  { title: "Electrical Installations", short: "Industrial electrical works" },
+  { title: "Energy Systems", short: "Solar & auxiliary systems" },
+  { title: "Industrial Diagnostics", short: "Testing & fault analysis" },
+  { title: "Maintenance Programs", short: "Planned service" },
 ];
 
 export default function RequestServicePage() {
@@ -101,16 +86,20 @@ export default function RequestServicePage() {
   };
 
   return (
-    <section className={styles.request}>
+    <section className={styles.page}>
       <div className={styles.container}>
+        {/* HEADER */}
         <header className={styles.header}>
-          <h1>Request a service</h1>
-          <p>Recite nam što trebate — pregledat ćemo vaš zahtjev i javiti se uskoro.</p>
+          <h1>Request Service</h1>
+          <p>
+            Tell us what you need. Our technical team will review your request
+            and get back to you shortly.
+          </p>
         </header>
 
-        {/* STEP 1 */}
+        {/* SERVICE PICKER */}
         <section className={styles.step}>
-          <h2>1. Odaberite uslugu</h2>
+          <h2>Select a service</h2>
 
           <div className={styles.serviceGrid}>
             {SERVICES.map((s) => (
@@ -131,56 +120,60 @@ export default function RequestServicePage() {
           </div>
         </section>
 
-        {/* STEP 2 - Uvijek vidljivo */}
-        <section className={styles.step}>
-          <h2>2. Opis zahtjeva</h2>
+        {/* FORM */}
+        <section className={styles.formSection}>
+          <h2>Project details</h2>
 
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.field}>
-              <label>Predmet</label>
+              <label>Subject</label>
               <input
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
-                placeholder="Kratki sažetak"
+                placeholder="Short summary"
                 required
               />
             </div>
 
             <div className={styles.field}>
-              <label>Opis</label>
+              <label>Description</label>
               <textarea
                 rows={6}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Objasnite što trebate, ciljeve, rokove..."
+                placeholder="Describe the issue, goals, deadlines…"
                 required
               />
             </div>
 
-            <div className={styles.field}>
-              <label>Tvrtka (opcionalno)</label>
-              <input
-                value={company}
-                onChange={(e) => setCompany(e.target.value)}
-                placeholder="Naziv tvrtke"
-              />
-            </div>
+            <div className={styles.fieldRow}>
+              <div className={styles.field}>
+                <label>Company (optional)</label>
+                <input
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  placeholder="Company name"
+                />
+              </div>
 
-            <div className={styles.field}>
-              <label>Učitajte sliku (opcionalno)</label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => setImageFile(e.target.files[0])}
-              />
+              <div className={styles.field}>
+                <label>Upload image (optional)</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setImageFile(e.target.files[0])}
+                />
+              </div>
             </div>
 
             <button className={styles.submitBtn} disabled={loading}>
-              {loading ? "Slanje..." : "Pošalji zahtjev"}
+              {loading ? "Sending…" : "Submit request"}
             </button>
 
             {success && (
-              <p className={styles.success}>✅ Zahtjev je uspješno poslan</p>
+              <p className={styles.success}>
+                ✅ Request successfully submitted
+              </p>
             )}
           </form>
         </section>
@@ -188,3 +181,10 @@ export default function RequestServicePage() {
     </section>
   );
 }
+
+
+// ===============================
+// ServiceRequest.module.css
+// ===============================
+
+

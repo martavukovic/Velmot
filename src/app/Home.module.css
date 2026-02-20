@@ -1,38 +1,50 @@
-/* ======================
-   BASE
-====================== */
+
 .page {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  color: #1f2933;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #e5e7eb;
+  background: radial-gradient(circle at 20% 10%, #0f172a, #020617 60%);
 }
 
-/* ======================
-   HERO
-====================== */
+/* HERO */
 .hero {
-  background: #0f172a;
-  color: white;
-  padding: 6rem 1.5rem;
+  padding: 5rem 1.5rem 4rem;
+  position: relative;
+  overflow: hidden; /* da slika koja izlazi iz grid-a ne stvara scroll */
 }
 
 .heroInner {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
-.hero h1 {
-  font-size: clamp(2.2rem, 5vw, 3rem);
+.heroText h1 {
+  font-size: clamp(2.6rem, 4vw, 3.4rem);
+  line-height: 1.15;
   font-weight: 600;
+  margin: 1rem 0 1.2rem;
+  color: #f8fafc;
 }
 
-.hero p {
-  margin-top: 1.5rem;
+.heroText p {
+  color: #94a3b8;
   max-width: 520px;
-  color: #cbd5e1;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: #60a5fa;
 }
 
 .heroActions {
-  margin-top: 3rem;
+  margin-top: 2rem;
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -41,222 +53,124 @@
 .primaryBtn {
   background: #c0392b;
   color: white;
-  padding: 0.9rem 1.6rem;
-  border-radius: 8px;
-  font-weight: 500;
+  padding: 0.85rem 1.5rem;
+  border-radius: 10px;
   text-decoration: none;
-  display: inline-block;
-  transition: background-color 0.25s ease, transform 0.15s ease;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .primaryBtn:hover {
-  background-color: #af2e26;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  background: #a93226;
 }
 
 .secondaryBtn {
-  border: 1px solid #475569;
-  color: white;
-  padding: 0.9rem 1.6rem;
-  border-radius: 8px;
+  border: 1px solid #334155;
+  color: #e5e7eb;
+  padding: 0.85rem 1.5rem;
+  border-radius: 10px;
   text-decoration: none;
-  transition: background-color 0.25s ease;
 }
 
 .secondaryBtn:hover {
-  background-color: #475569;
+  background: rgba(148, 163, 184, 0.08);
 }
 
-/* SERVICES */
-.services {
-  padding: 6rem 1.5rem;
-  background: linear-gradient(#fff, #f8fafc);
-}
-
-.services h2 {
-  max-width: 1100px;
-  margin: 0 auto 3rem;
-  font-size: 2.2rem;
-  color: #0f172a;
-  font-weight: 600;
-}
-
-.services h3 {
-  font-weight: 600;
-}
-
-.cards {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.8rem;
-}
-
-.card {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  border: 1px solid #e2e8f0;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-}
-
-.cardHeader {
-  display: flex;
-  gap: 0.8rem;
-}
-
-.cardHeader h3 {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: #0f172a;
-  letter-spacing: -0.01em;
-}
-
-.cardHeader span {
-  display: block;
-  margin-top: 0.4rem;
-  font-size: 0.85rem;
-  color: #64748b;
-}
-
-.card.active .cardHeader span {
-  color: #94a3b8;
-}
-
-.cardBody {
-  overflow: hidden;
-  transition: max-height 0.35s ease, opacity 0.3s ease;
-}
-
-.cardBody p {
-  text-align: left;      /* Tekst ide s lijeva na desno */
-  font-size: 0.85rem;    /* Uskladi veličinu s ostalim tekstom */
-  color: #36404f;        /* Ako želiš malo tamniju nijansu, usklađeno s ostalim tekstom */
-  margin: 0;             /* Ukloni defaultni margin, ako ima */
-  line-height: 1.4;      /* Za bolju čitljivost */
-}
-
-
-.collapse {
-  max-height: 0;
-  opacity: 0;
-}
-
-.expand {
-  max-height: 200px;
-  opacity: 1;
-  margin-top: 1rem;
-}
-
-.expandHint {
-  display: block;
-  margin-top: 1rem;
-  font-size: 0.75rem;
-  color: #94a3b8;
-}
-
-/* ======================
-   CAROUSEL
-====================== */
-.carouselSection {
-  max-width: 1100px;
-  margin: 3rem auto 5rem;
-  padding: 0 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.carousel {
+/* HERO IMAGE */
+.heroVisual {
   position: relative;
-  width: 100%;
-  max-width: 700px;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 }
 
-.carouselImage {
-  transition: opacity 0.5s ease-in-out;
-  opacity: 1;
-  display: block;
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  margin: 0 auto;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+.heroImage {
+  width: auto; /* neka zadrži originalnu širinu/visinu */
+  max-width: 500px; /* prilagodi veličinu */
+  height: auto;
+  object-fit: contain; /* nema cropanja */
+  position: absolute; /* slobodno lebdi */
+  top: 50%; /* centriraj vertikalno */
+  transform: translateY(-50%);
+  opacity: 0.5;
 }
 
-.dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background-color: white;
-  cursor: pointer;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
-}
-
-.activeDot {
-  background-color: #c0392b;
-}
-
-.arrow {
+.glow {
   position: absolute;
   top: 50%;
+  right: 0;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.35), transparent 70%);
+  filter: blur(60px);
   transform: translateY(-50%);
-  background: transparent;
-  border: 1px solid #cbd5e1;
-  color: #0f172a;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  font-size: 1.6rem;
-  font-weight: 400;
-  padding-bottom: 5.5px;
-  cursor: pointer;
+  z-index: 0;
+}
 
+
+/* STATS */
+.stats {
   display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.15s ease;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
 }
 
-.arrow:hover {
-  background-color: #f1f5f9;
-  border-color: #94a3b8;
-  transform: translateY(-50%) scale(1.05);
+.stats strong {
+  display: block;
+  font-size: 1.4rem;
+  color: #f8fafc;
 }
 
-.left {
-  left: -64px;   /* IZVAN SLIKE */
+.stats span {
+  font-size: 0.8rem;
+  color: #94a3b8;
 }
 
-.right {
-  right: -64px;  /* IZVAN SLIKE */
+/* VALUE SECTION */
+.valueSection {
+  padding: 4rem 1.5rem;
 }
 
-/* ======================
-   CTA
-====================== */
+.valueInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.valueInner h2 {
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+  color: #f8fafc;
+  font-weight: 400;
+  text-align: center;
+}
+
+.valueGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.valueItem {
+  background: rgba(38, 44, 57, 0.362);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 16px;
+  padding: 1.6rem;
+}
+
+.valueItem h4 {
+  margin-bottom: 0.5rem;
+  color: #e2e8f0;
+  text-align: center;
+}
+
+.valueItem p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+/* CTA */
 .cta {
-  background: #f8fafc;
-  border-top: 1px solid #e2e8f0;
-  padding: 4.5rem 1.5rem;
+  padding: 4rem 1.5rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
 }
 
 .ctaInner {
@@ -264,38 +178,30 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 3rem;
+  gap: 2rem;
   align-items: center;
 }
 
-.ctaText h2 {
-  font-size: 1.6rem;
+.ctaInner h2 {
+  font-size: large;
+  color: #f8fafc;
   font-weight: 600;
 }
 
-.ctaText p {
-  margin-top: 0.8rem;
-  max-width: 520px;
-  color: #475569;
+.ctaInner p {
+  color: #94a3b8;
 }
 
-.ctaButton {
-  border-radius: 30px;
-  font-weight: 600;
-  width: 100%;
-  padding: 0.9rem 1.6rem;
-  text-align: center;
-  display: inline-block;
-  padding-bottom: 0.5;
+.ctaBtn {
+  white-space: nowrap;
+  margin-right: 110px;
 }
 
-/* ======================
-   FOOTER
-====================== */
+/* FOOTER */
 .footer {
-  background: #0f172a;
-  color: #cbd5f5;
-  padding: 4rem 1.5rem 2.5rem;
+  background: #020617;
+  color: #94a3b8;
+  padding: 3.5rem 1.5rem 2rem;
 }
 
 .footerGrid {
@@ -303,171 +209,31 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 2.5rem;
-}
-
-.footerBrand strong {
-  font-size: 1.2rem;
-  letter-spacing: 0.02em;
-}
-
-.footerBrand p {
-  margin-top: 0.3rem;
-  color: #94a3b8;
-}
-
-.footer h4 {
-  font-size: 0.9rem;
-  margin-bottom: 0.6rem;
-  color: white;
-}
-
-.footer p {
-  font-size: 0.85rem;
-  color: #94a3b8;
+  gap: 2rem;
+    text-align: center;
 }
 
 .footerBottom {
   max-width: 1100px;
-  margin: 3rem auto 0;
+  margin: 2.5rem auto 0;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
   text-align: center;
   font-size: 0.8rem;
-  color: #94a3b8;
 }
 
-/* ======================
-   SERVICES – CENTERED
-====================== */
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+  }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.8rem;
-}
-
-/* ======================
-   MODAL
-====================== */
-
-.modalOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  animation: fadeIn 0.25s ease;
-}
-
-
-.modal {
-  background: white;
-  border-radius: 20px;
-  padding: 2.6rem 2.4rem;
-  max-width: 520px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 40px 90px rgba(0,0,0,0.35);
-  animation: scaleIn 0.25s ease;
-}
-
-.modalTitle {
-  font-weight: 500;
-  display: flex;
-  justify-content:center;
-  align-items: center;
-  margin-bottom: 15px;
-  padding-right: 35px;
-}
-
-.modalTitle h3 {
-  padding-left: 15px;
-}
-
-.modal p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: rgba(15, 23, 42, 0.879);
-  display: flex;
-  justify-content: flex-start;
-}
-
-.modalClose {
-  margin-top: 1.6rem;
-  padding: 0.6rem 1.8rem;
-  border-radius: 999px;
-  border: none;
-  background: #c0392b;
-  color: white;
-  cursor: pointer;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes scaleIn {
-  from { transform: scale(0.92); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-
-/* ======================
-   RESPONSIVE
-====================== */
-@media (max-width: 768px) {
-
+  .valueGrid {
+    grid-template-columns: 1fr;
+  }
 
   .ctaInner {
     grid-template-columns: 1fr;
-    gap: 2rem;
     text-align: center;
-  }
-
-  .carouselImage {
-  width: 90%;
-  max-height: 300px; /* možeš prilagoditi po želji */
-  object-fit: cover;
-  margin: 0 auto; /* centrira sliku horizontalno */
-  display: block; /* da margin auto funkcionira */
-}
-
-
-  /* Strelice manje */
-  .carouselBtn {
-    width: 28px;
-    height: 28px;
-    font-size: 1.4rem;
-  }
-
-  .carouselBtn:first-child {
-    left: -20px;
-  }
-
-  .carouselBtn:last-child {
-    right: -20px;
-  }
-
-  /* CTA gumb da nije full width */
-  .ctaButton {
-    width: auto;
-    padding: 0.9rem 2rem;
-    display: inline-block;
-    margin: 0 auto;
-  }
-
-    .left {
-    left: -36px;
-  }
-
-  .right {
-    right: -36px;
   }
 }
