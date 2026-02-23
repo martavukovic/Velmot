@@ -1,0 +1,162 @@
+.services {
+  background: #0b1220;
+  color: #e5e7eb;
+  padding: 5rem 1.5rem 6rem;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.header h1 {
+  font-size: clamp(2.2rem, 4vw, 2.8rem);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.header p {
+  color: #94a3b8;
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* LIST */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* ROW */
+
+.serviceRow {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: linear-gradient(145deg, #111827, #0f172a);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.serviceRow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 60px rgba(2, 6, 23, 0.5);
+}
+
+/* IMAGE */
+
+.imageWrap {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #020617;
+}
+
+.imageWrap img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+/* CONTENT */
+
+.content h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.15);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.9rem;
+}
+
+.content p {
+  color: #cbd5f5;
+  line-height: 1.65;
+  max-width: 640px;
+}
+
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.filterBtn {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filterBtn:hover {
+  background: #f5f5f5;
+}
+
+.active {
+  background: #111;
+  color: white;
+  border-color: #111;
+}
+
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 32px 0 40px;
+  justify-content: center;
+}
+
+.filterBtn {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color, #ddd);
+  background: transparent;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.filterBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.active {
+  background: #111;
+  color: white;
+  border-color: #111;
+}
+/* MOBILE */
+
+@media (max-width: 900px) {
+  .serviceRow {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+
+  .imageWrap img {
+    height: 200px;
+  }
+}
