@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import styles from "./register.module.css";
-import AuthGuard from "../components/AuthGuard";
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
