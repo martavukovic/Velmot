@@ -123,11 +123,13 @@
 
 .primaryBtn {
   background: #991b1b;
+  box-shadow:#00081c;
   color: white;
 }
 
 .secondaryBtn {
   background: #dde6ff;
+  box-shadow: #00081c;
   color: #00081c;
 }
 
@@ -232,10 +234,10 @@
   margin: 0 auto;
   margin-right: 160px;
   margin-bottom: 60px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0rem;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  gap: 2rem;
 }
 
 .ctaInner h2 {
@@ -252,6 +254,59 @@
 .ctaBtn {
   white-space: nowrap;
   margin-right: 180px;
+}
+
+/* ===============================
+   BOTTOM FOOTER
+=============================== */
+
+.bottomFooter {
+  background: #fbf8f7;
+  width: 100%;
+  padding: 40px 20px 50px;
+  padding-top: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  color: #0f172ac7;
+}
+
+/* linija iznad */
+.footerLine {
+  width: 100%;
+  max-width: 1200px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(20, 40, 90, 0.25),
+    transparent
+  );
+  margin-bottom: 22px;
+}
+
+/* tekst */
+.footerCopy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-inter, Inter, system-ui);
+  font-size: 14px;
+  color: rgba(20, 40, 90, 0.75);
+  letter-spacing: 0.3px;
+}
+
+/* © krug stil */
+.copyright {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #14285a;
 }
 
 /* ================= MOBILE ================= */
@@ -297,9 +352,26 @@
     text-align: center;
     padding: 13px 20px;
   }
-
   .cta{
-    grid-template-columns: 1fr auto;
+    padding-bottom: 0px;
+  }
+
+ .ctaInner {
+    flex-direction: column; 
+    justify-content: center;
+    text-align: center;     
+    margin-right: 0px;
+    margin-bottom: 0px;
+  }
+
+  .ctaBtn {
+    margin-top: 1rem;
+    margin-left: 175px;
+    margin-bottom: 60px;
+  }
+
+  .valueSection{
+    padding-bottom: 0px;
   }
 }
 
@@ -308,6 +380,7 @@
 @media (max-width: 480px) {
   .hero {
     min-height: 480px;
+    padding-top: 80px;
   }
 
   .heroInner {

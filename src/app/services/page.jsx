@@ -4,6 +4,10 @@ import styles from "./services.module.css";
 
 export const revalidate = 60;
 
+export const metadata = {
+  title: "Service",
+};
+
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,

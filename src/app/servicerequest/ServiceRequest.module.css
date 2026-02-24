@@ -17,6 +17,30 @@
   margin: 0 auto;
 }
 
+/* ===== PAGE LOADER ===== */
+
+.pageLoader {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(20, 40, 90, 0.15);
+  border-top: 4px solid #14285a;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* ===============================
    HEADER
 =============================== */
@@ -169,18 +193,25 @@
 =============================== */
 
 .submitBtn {
+  display: flex;
+  justify-content: center;
   width:fit-content;
   text-align: center;
   margin-top: 10px;
-  padding: 14px;
+  padding: 18px;
   border-radius: 999px;
   border: none;
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
   color: white;
-  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  background: linear-gradient(135deg, #6b0f1a, #0b1f3a);
   transition: all 0.25s ease;
+}
+
+.submit{
+  display: flex;
+  justify-content: center;
 }
 
 .submitBtn:hover {
@@ -199,9 +230,36 @@
 =============================== */
 
 .success {
+  display: flex;
+  justify-content: center;
   margin-top: 14px;
   color: #4ade80;
   font-size: 14px;
+}
+
+.imagePreview {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.removeImageBtn {
+  background: transparent;
+  border: 1px solid #8b0000;
+  color: #8b0000;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.removeImageBtn:hover {
+  background: #8b0000;
+  color: white;
 }
 
 /* ===============================

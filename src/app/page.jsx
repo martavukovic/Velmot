@@ -182,6 +182,15 @@ export default function HomePage() {
             </a>
           </div>
         </section>
+        {/* ===== BOTTOM FOOTER ===== */}
+        <footer className={styles.bottomFooter}>
+          <div className={styles.footerLine} />
+
+          <div className={styles.footerCopy}>
+            <span className={styles.copyright}>©</span>
+            <span>2026 Velmot. All rights reserved.</span>
+          </div>
+        </footer>
       </main>
     </>
   );

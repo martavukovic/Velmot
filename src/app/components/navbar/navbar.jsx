@@ -85,7 +85,7 @@ export default function NavbarWithLogin({ force = false }) {
     });
 
     if (error) {
-      setAuthError("Neispravan email ili lozinka");
+      setAuthError("Incorrect email or password.");
       setLoading(false);
       return;
     }
@@ -100,7 +100,7 @@ export default function NavbarWithLogin({ force = false }) {
 
     if (!profile) {
       await supabase.auth.signOut();
-      setAuthError("Nemate pristup aplikaciji.");
+      setAuthError("You don't have an account.");
       setLoading(false);
       return;
     }
@@ -145,51 +145,67 @@ const handleRequestClick = async (e) => {
   }
 };
 
-  // --- NAV LINKOVI ---
-  const NavLinks = ({ mobile = false }) => (
-    <>
-      <Link href="/" className={isActive("/") ? styles.active : ""}>
-        Home
-      </Link>
+// --- NAV LINKOVI ---
+const NavLinks = ({ mobile = false }) => (
+  <>
+    <Link
+      href="/"
+      className={isActive("/") ? styles.active : ""}
+      onClick={() => mobile && setOpen(false)}
+    >
+      Home
+    </Link>
 
-      <Link
-        href="/services"
-        className={isActive("/services") ? styles.active : ""}
+    <Link
+      href="/services"
+      className={isActive("/services") ? styles.active : ""}
+      onClick={() => mobile && setOpen(false)}
+    >
+      Services
+    </Link>
+
+    <Link
+      href="/servicerequest"
+      onClick={(e) => {
+        handleRequestClick(e);
+        if (mobile) setOpen(false);
+      }}
+      className={isActive("/servicerequest") ? styles.active : ""}
+    >
+      Request
+    </Link>
+
+    <Link
+      href="/contact"
+      className={isActive("/contact") ? styles.active : ""}
+      onClick={() => mobile && setOpen(false)}
+    >
+      Contact
+    </Link>
+
+    {!user ? (
+      <button
+        className={styles.signin}
+        onClick={() => {
+          setShowLogin(true);
+          if (mobile) setOpen(false); // zatvori menu
+        }}
       >
-        Services
-      </Link>
-
-      {/* ✅ ZAŠTIĆENI REQUEST */}
-      <Link
-        href="/servicerequest"
-        onClick={handleRequestClick}
-        className={isActive("/servicerequest") ? styles.active : ""}
+        LogIn
+      </button>
+    ) : (
+      <button
+        className={styles.signin}
+        onClick={() => {
+          handleLogout();
+          if (mobile) setOpen(false); // zatvori menu
+        }}
       >
-        Request
-      </Link>
-
-      <Link
-        href="/contact"
-        className={isActive("/contact") ? styles.active : ""}
-      >
-        Contact
-      </Link>
-
-      {/* ✅ LOGIN / LOGOUT SWITCH */}
-      {!user ? (
-        <button
-          className={styles.signin}
-          onClick={() => setShowLogin(true)}
-        >
-          LogIn
-        </button>
-      ) : (
-        <button className={styles.signin} onClick={handleLogout}>
-          Logout
-        </button>
-      )}
-    </>
-  );
+        Logout
+      </button>
+    )}
+  </>
+);
 
   return (
     
@@ -234,24 +250,24 @@ const handleRequestClick = async (e) => {
         <div className={styles.overlay}>
           <div className={styles.modal}>
             {!force && (
-<button
-  className={styles.close}
-  onClick={() => {
-    setShowLogin(false);
+        <button
+          className={styles.close}
+          onClick={() => {
+            setShowLogin(false);
 
-    // ✅ ako je user bio na request pokušaju → vrati na home
-    const redirect =
-      new URLSearchParams(window.location.search).get("redirect");
+            // ✅ ako je user bio na request pokušaju → vrati na home
+            const redirect =
+              new URLSearchParams(window.location.search).get("redirect");
 
-    if (redirect === "/servicerequest" || pathname === "/servicerequest") {
-      router.push("/");
-    }
-  }}
-  aria-label="Close"
->
-  ×
-</button>
-            )}
+            if (redirect === "/servicerequest" || pathname === "/servicerequest") {
+              router.push("/");
+            }
+          }}
+          aria-label="Close"
+        >
+          ×
+        </button>
+      )}
 
             <h1 className={styles.title}>Sign In</h1>
 

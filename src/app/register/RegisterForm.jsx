@@ -17,6 +17,10 @@ export default function RegisterForm() {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // 🔐 strong password regex
+  const strongPassword =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#*?&]).{8,}$/;
+
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     setError(null);
@@ -27,8 +31,18 @@ export default function RegisterForm() {
     setError(null);
     setLoading(true);
 
+    // ✅ password strength check
+    if (!strongPassword.test(formData.password)) {
+      setError(
+        "Password must be at least 8 characters and include uppercase, lowercase, number and special character."
+      );
+      setLoading(false);
+      return;
+    }
+
+    // ✅ confirm password
     if (formData.password !== formData.confirmPassword) {
-      setError("Lozinke se ne podudaraju");
+      setError("Passwords do not match.");
       setLoading(false);
       return;
     }
@@ -48,12 +62,12 @@ export default function RegisterForm() {
 
     const userId = signUpData.user?.id;
     if (!userId) {
-      setError("Greška: user ID nije dostupan.");
+      setError("Error: user ID not available.");
       setLoading(false);
       return;
     }
 
-    // ✅ UPDATE (NE INSERT!)
+    // ✅ UPDATE PROFILE
     const { error: profileError } = await supabase
       .from("users")
       .update({
@@ -78,69 +92,76 @@ export default function RegisterForm() {
 
   return (
     <div className={styles.page}>
-      <h1>Registracija</h1>
+      <div className={styles.card}>
+        <h1 className={styles.title}>Create Account</h1>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.field}>
-          <label>Ime</label>
-          <input
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.field}>
+            <label>First Name</label>
+            <input
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className={styles.field}>
-          <label>Prezime</label>
-          <input
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className={styles.field}>
+            <label>Last Name</label>
+            <input
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className={styles.field}>
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className={styles.field}>
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className={styles.field}>
-          <label>Lozinka</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className={styles.field}>
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            <span className={styles.hint}>
+              Minimum 8 characters, uppercase, lowercase, number & symbol
+            </span>
+          </div>
 
-        <div className={styles.field}>
-          <label>Potvrdi lozinku</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className={styles.field}>
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        {error && <p className={styles.error}>{error}</p>}
-        {success && <p className={styles.success}>✅ Registracija uspješna</p>}
+          {error && <p className={styles.error}>{error}</p>}
+          {success && (
+            <p className={styles.success}>✅ Registration successful</p>
+          )}
 
-        <button className={styles.button} disabled={loading}>
-          {loading ? "Registracija..." : "Registriraj se"}
-        </button>
-      </form>
+          <button className={styles.button} disabled={loading}>
+            {loading ? "Creating account..." : "Create account"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
