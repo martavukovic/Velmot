@@ -3,8 +3,9 @@
 // ===============================
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import { useRouter } from "next/navigation";
 import styles from "./ServiceRequest.module.css";
 
 const SERVICES = [
@@ -21,9 +22,38 @@ export default function RequestServicePage() {
   const [subject, setSubject] = useState("");
   const [description, setDescription] = useState("");
   const [company, setCompany] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState(false);
   const [imageFile, setImageFile] = useState(null);
+   const router = useRouter();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      // ❌ nije logiran → nazad na home + otvori login
+      if (!user) {
+        router.replace("/?redirect=/servicerequest");
+
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent("open-login"));
+        }, 100);
+
+                return;
+      }
+
+      // ✅ logiran → pusti dalje
+      setLoading(false);
+    };
+
+    checkUser();
+  }, [router]);
+
+  // ⏳ loader dok provjerava
+  if (loading) return null;
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -125,15 +155,6 @@ export default function RequestServicePage() {
           <h2>Project details</h2>
 
           <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.field}>
-              <label>Subject</label>
-              <input
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-                placeholder="Short summary"
-                required
-              />
-            </div>
 
             <div className={styles.field}>
               <label>Description</label>
@@ -165,7 +186,7 @@ export default function RequestServicePage() {
                 />
               </div>
             </div>
-
+                
             <button className={styles.submitBtn} disabled={loading}>
               {loading ? "Sending…" : "Submit request"}
             </button>

@@ -2,6 +2,9 @@ import Navbar from "./components/navbar/navbar";
 import "./Home.module.css"
 import "./globals.css";
 import Head from 'next/head'
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: 'Velmot',
@@ -14,7 +17,7 @@ export default function RootLayout({ children }) {
       <Head>
         <link rel="icon" href="/images/Velmot_cut_logo.png" />
       </Head>
-      <body>
+      <body className={inter.className}>
         <Navbar />
         <main>{children}</main>
       </body>

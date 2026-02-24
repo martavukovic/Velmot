@@ -14,6 +14,7 @@ export default function NavbarWithLogin({ force = false }) {
   const [open, setOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [user, setUser] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
 
   // 🔹 LOGIN STATE (NE DIRAMO IZGLED)
   const [email, setEmail] = useState("");
@@ -23,6 +24,12 @@ export default function NavbarWithLogin({ force = false }) {
   const [loading, setLoading] = useState(false);
 
   const isActive = (href) => pathname === href;
+
+  useEffect(() => {
+  const openLogin = () => setShowLogin(true);
+  window.addEventListener("open-login", openLogin);
+  return () => window.removeEventListener("open-login", openLogin);
+}, []);
 
   // ✅ PROVJERA SESSION (KLJUČNO)
   useEffect(() => {
@@ -38,6 +45,15 @@ export default function NavbarWithLogin({ force = false }) {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  useEffect(() => {
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 30);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   // 🔹 VALIDACIJA (OSTAJE ISTA)
   const validate = () => {
@@ -99,23 +115,35 @@ export default function NavbarWithLogin({ force = false }) {
   };
 
   // 🔹 LOGOUT (NOVO)
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
+const handleLogout = async () => {
+  await supabase.auth.signOut();
+
+  // ✅ ako je na request stranici — izbaci ga
+  if (pathname === "/servicerequest") {
+    router.push("/");
+  } else {
     router.refresh();
-  };
+  }
+};
 
   // 🔹 REQUEST GUARD (NOVO)
-  const handleRequestClick = async (e) => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+const handleRequestClick = async (e) => {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-    if (!user) {
-      e.preventDefault();
-      setShowLogin(true);
-      return;
-    }
-  };
+  if (!user) {
+    e.preventDefault();
+
+    // ✅ dodaj redirect param
+    const params = new URLSearchParams(window.location.search);
+    params.set("redirect", "/servicerequest");
+    window.history.replaceState(null, "", `?${params.toString()}`);
+
+    setShowLogin(true);
+    return;
+  }
+};
 
   // --- NAV LINKOVI ---
   const NavLinks = ({ mobile = false }) => (
@@ -138,13 +166,6 @@ export default function NavbarWithLogin({ force = false }) {
         className={isActive("/servicerequest") ? styles.active : ""}
       >
         Request
-      </Link>
-
-      <Link
-        href="/about"
-        className={isActive("/about") ? styles.active : ""}
-      >
-        About
       </Link>
 
       <Link
@@ -174,7 +195,7 @@ export default function NavbarWithLogin({ force = false }) {
     
     <>
       {/* NAVBAR */}
-      <header className={styles.navbar}>
+      <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
         <div className={styles.inner}>
           <div className={styles.logo}>
             <Image
@@ -213,13 +234,23 @@ export default function NavbarWithLogin({ force = false }) {
         <div className={styles.overlay}>
           <div className={styles.modal}>
             {!force && (
-            <button
-              className={styles.close}
-              onClick={() => setShowLogin(false)}
-              aria-label="Close"
-            >
-              ×
-            </button>
+<button
+  className={styles.close}
+  onClick={() => {
+    setShowLogin(false);
+
+    // ✅ ako je user bio na request pokušaju → vrati na home
+    const redirect =
+      new URLSearchParams(window.location.search).get("redirect");
+
+    if (redirect === "/servicerequest" || pathname === "/servicerequest") {
+      router.push("/");
+    }
+  }}
+  aria-label="Close"
+>
+  ×
+</button>
             )}
 
             <h1 className={styles.title}>Sign In</h1>

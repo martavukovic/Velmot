@@ -1,29 +1,29 @@
-// =============================
-// HomePage.jsx
-// =============================
 "use client";
 
 import Head from "next/head";
-import { useState, useEffect } from "react";
 import styles from "./Home.module.css";
+import { useState } from "react";
+import { supabase } from "@/lib/supabaseClient"; // ili tvoja putanja
 
-const images = [
-  "/images/Velmot1.jpeg",
-  "/images/Velmot2.jpeg",
-  "/images/Velmot3.jpeg",
-  "/images/Velmot4.jpeg",
-];
+const handleRequestClick = async (e) => {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    e.preventDefault();
+
+    // ✅ dodaj redirect param
+    const params = new URLSearchParams(window.location.search);
+    params.set("redirect", "/servicerequest");
+    window.history.replaceState(null, "", `?${params.toString()}`);
+
+    setShowLogin(true);
+    return;
+  }
+};
 
 export default function HomePage() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 4500);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <>
       <Head>
@@ -31,31 +31,31 @@ export default function HomePage() {
       </Head>
 
       <main className={styles.page}>
+        {/* HERO */}
 <section className={styles.hero}>
+  <div className={styles.heroOverlay} />
+
   <div className={styles.heroInner}>
-    <div className={styles.heroText}>
-      <span className={styles.badge}>VELMOT D.O.O.</span>
+    {/* Lijevi stupac: badge, naslov i opis */}
+    <div className={styles.heroCol}>
+      <div className={styles.heroText}>
+        <span className={styles.badge}>VELMOT D.O.O.</span>
 
-      <h1>
-        Reliable Electrical
-        <br /> & Motor Solutions
-      </h1>
+        <h1>
+          Reliable Electrical
+          <br /> & Motor Solutions
+        </h1>
 
-      <p>
-        Professional electric motor rewinding, transformer services
-        and industrial electrical works. Fast response, proven
-        expertise and long-term reliability.
-      </p>
-
-      <div className={styles.heroActions}>
-        <a href="/servicerequest" className={styles.primaryBtn}>
-          Request Service
-        </a>
-        <a href="/services" className={styles.secondaryBtn}>
-          Learn More
-        </a>
+        <p>
+          Professional electric motor rewinding, transformer services
+          and industrial electrical works. Fast response, proven
+          expertise and long-term reliability.
+        </p>
       </div>
+    </div>
 
+    {/* Desni stupac: stats i buttons */}
+    <div className={styles.heroCol}>
       <div className={styles.stats}>
         <div>
           <strong>10+</strong>
@@ -70,28 +70,45 @@ export default function HomePage() {
           <span>Response Time</span>
         </div>
       </div>
-    </div>
 
-    {/* HERO IMAGE */}
-    <div className={styles.heroVisual}>
-      <img
-        src="/images/gear.png"
-        className={styles.heroImage}
-        alt="Gear"
-      />
-      <div className={styles.glow} />
+      <div className={styles.heroActions}>
+        <a href="/servicerequest"
+        onClick={handleRequestClick}
+         className={styles.primaryBtn}>
+          Request Service
+        </a>
+        <a href="/services" className={styles.secondaryBtn}>
+          Learn More
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-
-        {/* VALUE SECTION */}
+        {/* VALUE CARDS */}
         <section className={styles.valueSection}>
           <div className={styles.valueInner}>
-            <h2>Built for Reliability</h2>
-
+            <h2 className={styles.sectionTitle}>Why Choose Us?</h2>
             <div className={styles.valueGrid}>
-              <div className={styles.valueItem}>
+              {/* CARD 1 */}
+              <div className={styles.valueCard}>
+                <div className={styles.iconWrap}>
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M12 6v6l4 2"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="9"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    />
+                  </svg>
+                </div>
                 <h4>Industrial Focus</h4>
                 <p>
                   Specialized in demanding industrial environments and heavy
@@ -99,19 +116,48 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div className={styles.valueItem}>
+              {/* CARD 2 */}
+              <div className={styles.valueCard}>
+                <div className={styles.iconWrap}>
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
                 <h4>Fast Turnaround</h4>
                 <p>
                   Efficient diagnostics and repair workflow to minimize
-                  downtime.
+                  downtime and keep operations running.
                 </p>
               </div>
 
-              <div className={styles.valueItem}>
+              {/* CARD 3 */}
+              <div className={styles.valueCard}>
+                <div className={styles.iconWrap}>
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M5 13l4 4L19 7"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="9"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    />
+                  </svg>
+                </div>
                 <h4>Proven Quality</h4>
                 <p>
                   Every repair and installation follows strict technical
-                  standards and testing.
+                  standards and detailed testing procedures.
                 </p>
               </div>
             </div>
@@ -136,35 +182,7 @@ export default function HomePage() {
             </a>
           </div>
         </section>
-
-        {/* FOOTER */}
-        <footer className={styles.footer}>
-         <div className={styles.footerGrid}>
-            <div>
-              <strong>Velmot</strong>
-              <p>Electrotechnical Services</p>
-            </div>
-
-            <div>
-              <h4>Contact</h4>
-              <p>+385 95 9400 094</p>
-              <p>velmot@net.hr</p>
-            </div>
-
-            <div>
-              <h4>Location</h4>
-              <p>Put Piketa 8b</p>
-              <p>21230 Sinj, Croatia</p>
-            </div>
-          </div>
-
-          <div className={styles.footerBottom}>
-            © {new Date().getFullYear()} Velmot. All rights reserved.
-          </div>
-        </footer>
       </main>
     </>
   );
 }
-
-

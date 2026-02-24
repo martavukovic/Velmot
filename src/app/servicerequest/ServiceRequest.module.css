@@ -1,230 +1,233 @@
-/* ======================
-   PAGE BACKGROUND (dark like homepage)
-====================== */
+/* ===============================
+   PAGE
+=============================== */
 
-.request {
-  padding: 3.5rem 1.5rem 4rem;
-  background: linear-gradient(180deg, #0b1220 0%, #0f172a 60%, #0b1220 100%);
+.page {
   min-height: 100vh;
+  padding: 140px 20px 80px;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(59, 130, 246, 0.15), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(14, 165, 233, 0.12), transparent 40%),
+    #060b18;
+  color: #e6edf7;
 }
-
-/* ======================
-   CENTER CONTAINER (LIGHT BUT NOT WHITE)
-====================== */
 
 .container {
-  max-width: 920px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem;
-  border-radius: 24px;
-
-  /* 🔥 svijetlo ali ne bijelo */
-  background: linear-gradient(180deg, #e9eef6, #f1f5fb);
-
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  box-shadow: 0 30px 70px rgba(2, 6, 23, 0.35);
 }
 
-/* ======================
+/* ===============================
    HEADER
-====================== */
+=============================== */
 
 .header {
   text-align: center;
-  margin-bottom: 2.2rem;
+  margin-bottom: 48px;
 }
 
 .header h1 {
-  font-size: clamp(1.9rem, 4vw, 2.3rem);
-  font-weight: 600;
-  color: #0f172a;
-  margin-bottom: 0.5rem;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  margin-bottom: 12px;
 }
 
 .header p {
-  color: #475569;
-  font-size: 0.95rem;
+  color: #9fb0d0;
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
-/* ======================
-   STEP
-====================== */
+/* ===============================
+   STEP TITLE
+=============================== */
 
 .step {
-  margin-bottom: 2rem;
+  margin-bottom: 48px;
 }
 
-.step h2 {
-  font-size: 1.05rem;
+.step h2,
+.formSection h2 {
+  font-size: 22px;
   font-weight: 600;
-  color: #0f172a;
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
+  color: #dbe7ff;
 }
 
-/* ======================
-   SERVICE GRID — NARROW
-====================== */
+/* ===============================
+   SERVICE GRID
+=============================== */
 
 .serviceGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 260px));
-  justify-content: center;
-  gap: 0.8rem;
-  margin-bottom: 1.4rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
 }
-
-/* mobile */
-@media (max-width: 640px) {
-  .serviceGrid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-/* ======================
-   SERVICE CARD — CENTERED & COMPACT
-====================== */
 
 .serviceCard {
-  padding: 0.9rem 0.9rem;
-  border-radius: 14px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 20px;
+  text-align: left;
   cursor: pointer;
-  text-align: center;
-
-  transition:
-    transform 0.16s ease,
-    box-shadow 0.16s ease,
-    border-color 0.16s ease,
-    background 0.16s ease;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(10px);
 }
 
 .serviceCard strong {
   display: block;
-  font-size: 0.9rem;
-  color: #0f172a;
-  margin-bottom: 2px;
+  font-size: 16px;
+  margin-bottom: 6px;
 }
 
 .serviceCard span {
-  font-size: 0.78rem;
-  color: #64748b;
+  font-size: 14px;
+  color: #9fb0d0;
 }
 
-/* hover */
 .serviceCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(2, 6, 23, 0.12);
-  border-color: rgba(37, 99, 235, 0.25);
+  transform: translateY(-3px);
+  border-color: rgba(96, 165, 250, 0.6);
+  background: rgba(59, 130, 246, 0.08);
 }
 
-/* active */
+/* ACTIVE */
+
 .active {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  border-color: transparent;
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.16);
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.35);
 }
 
-.active strong,
-.active span {
-  color: white;
-}
+/* ===============================
+   FORM
+=============================== */
 
-/* ======================
-   FORM — SOFT PANEL
-====================== */
+.formSection {
+  margin-top: 40px;
+}
 
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1.4rem;
-  border-radius: 18px;
-
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  padding: 32px;
+  backdrop-filter: blur(14px);
 }
 
-/* ======================
-   FIELD
-====================== */
+/* ===============================
+   FIELDS
+=============================== */
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  margin-bottom: 20px;
 }
 
 .field label {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #334155;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #b7c6e6;
 }
 
 .field input,
 .field textarea {
-  padding: 0.65rem 0.75rem;
-  border-radius: 10px;
-  border: 1px solid #e2e8f0;
-  font-size: 0.9rem;
-  background: #ffffff;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: #e6edf7;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
 }
 
-.field textarea {
-  resize: vertical;
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #7f91b3;
 }
 
 .field input:focus,
 .field textarea:focus {
-  outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.08);
 }
 
-/* ======================
-   SUBMIT BUTTON — NORMAL SIZE
-====================== */
+/* ROW */
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+/* ===============================
+   BUTTON
+=============================== */
 
 .submitBtn {
-  margin-top: 0.3rem;
-  align-self: center;
-
-  background: linear-gradient(135deg, #c0392b, #a93226);
-  color: white;
-  border: none;
-  padding: 0.6rem 1.3rem;
+  width:fit-content;
+  text-align: center;
+  margin-top: 10px;
+  padding: 14px;
   border-radius: 999px;
+  border: none;
   font-weight: 600;
-  font-size: 0.88rem;
+  font-size: 15px;
   cursor: pointer;
-
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease,
-    filter 0.15s ease;
+  color: white;
+  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  transition: all 0.25s ease;
 }
 
 .submitBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(192, 57, 43, 0.35);
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.35);
 }
 
 .submitBtn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
-  box-shadow: none;
 }
 
-/* ======================
+/* ===============================
    SUCCESS
-====================== */
+=============================== */
 
 .success {
-  margin-top: 0.5rem;
-  font-size: 0.88rem;
-  color: #16a34a;
-  text-align: center;
-  font-weight: 500;
+  margin-top: 14px;
+  color: #4ade80;
+  font-size: 14px;
+}
+
+/* ===============================
+   MOBILE
+=============================== */
+
+@media (max-width: 900px) {
+  .serviceGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .fieldRow {
+    grid-template-columns: 1fr;
+  }
+
+  .page {
+    padding: 120px 16px 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .serviceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .form {
+    padding: 22px;
+  }
 }
