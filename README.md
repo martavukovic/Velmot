@@ -20,6 +20,7 @@
 
 - Link to your production version: [**Production Version**](https://velmot.vercel.app/) <!-- Replace with actual URL -->
 - Link to your final report: [**Final Report**](https://adhesive-odometer-d79.notion.site/Velmot-311a417f7b8a805a9a25e6629bfe23ac?source=copy_link) <!-- Replace with actual URL -->
+- Email and password to access: [Email: anaa@gmail.com, password: Anabanana1#]
 <!-- Add more as necessary -->
 
 ### Semester Assignments
