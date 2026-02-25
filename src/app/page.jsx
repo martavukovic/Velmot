@@ -2,8 +2,7 @@
 
 import Head from "next/head";
 import styles from "./Home.module.css";
-import { useState } from "react";
-import { supabase } from "@/lib/supabaseClient"; // ili tvoja putanja
+import { supabase } from "@/lib/supabaseClient"; 
 
 const handleRequestClick = async (e) => {
   const {
@@ -13,7 +12,6 @@ const handleRequestClick = async (e) => {
   if (!user) {
     e.preventDefault();
 
-    // ✅ dodaj redirect param
     const params = new URLSearchParams(window.location.search);
     params.set("redirect", "/servicerequest");
     window.history.replaceState(null, "", `?${params.toString()}`);
